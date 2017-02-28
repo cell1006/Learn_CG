@@ -1,39 +1,39 @@
 /* 
-	Ö±ÏßµÄÉ¨Ãè×ª»»¡ª¡ªÊıÖµÎ¢·Ö·¨
-	DDA £¨Digital Differential Analyzer£©
+	ç›´çº¿çš„æ‰«æè½¬æ¢â€”â€”æ•°å€¼å¾®åˆ†æ³•
+	DDA ï¼ˆDigital Differential Analyzerï¼‰
 */
-/*È¡Õû·½·¨*/
+/*å–æ•´æ–¹æ³•*/
 inline int round(const float a){
-	return int (a+0.5);//½«´«Èë²ÎÊıa¼Ó0.5ºóÈ¡Õû
+	return int (a+0.5);//å°†ä¼ å…¥å‚æ•°aåŠ 0.5åå–æ•´
 }
-/*DDA»­Ïß·½·¨*/
-void lineDDA(int xa, int ya ,int xb, intyb){ 
-	int dx=xb-xa,    //Çóx±ä»¯Á¿¸³Öµ¸ødx
-		dy=yb-ya,    //Çóy±ä»¯Á¿¸³Öµ¸ødy
-		steps,       //ÉùÃ÷Ñ­»·´ÎÊı£¨²½Êı£©
-		k;			 //ÉùÃ÷¼ÆÊıÆ÷
-	float xIncrement,  //ÉùÃ÷xÎ¢·ÖÔöÁ¿
-		  yIncrement,  //ÉùÃ÷yÎ¢·ÖÔöÁ¿
-		  x=xa,			//½«AµãxÖµint×ªfloat¸³¸øx
-		  y=ya;			//½«AµãyÖµint×ªfloat¸³¸øy
+/*DDAç”»çº¿æ–¹æ³•*/
+void lineDDA(int xa, int ya ,int xb, int yb){ 
+	int dx=xb-xa,    //æ±‚xå˜åŒ–é‡èµ‹å€¼ç»™dx
+		dy=yb-ya,    //æ±‚yå˜åŒ–é‡èµ‹å€¼ç»™dy
+		steps,       //å£°æ˜å¾ªç¯æ¬¡æ•°ï¼ˆæ­¥æ•°ï¼‰
+		k;			 //å£°æ˜è®¡æ•°å™¨
+	float xIncrement,  //å£°æ˜xå¾®åˆ†å¢é‡
+		  yIncrement,  //å£°æ˜yå¾®åˆ†å¢é‡
+		  x=xa,			//å°†Aç‚¹xå€¼intè½¬floatèµ‹ç»™x
+		  y=ya;			//å°†Aç‚¹yå€¼intè½¬floatèµ‹ç»™y
 		  
-	//ÅĞ¶Ïx±ä»¯Á¿¾ø¶ÔÖµÊÇ·ñ´óÓÚy±ä»¯Á¿¾ø¶ÔÖµ
+	//åˆ¤æ–­xå˜åŒ–é‡ç»å¯¹å€¼æ˜¯å¦å¤§äºyå˜åŒ–é‡ç»å¯¹å€¼
 	if(abs(dx)>abs(dy))
-		//Èç¹ûÊÇ£¬½«x±ä»¯Á¿¾ø¶ÔÖµ¸³¸østeps
+		//å¦‚æœæ˜¯ï¼Œå°†xå˜åŒ–é‡ç»å¯¹å€¼èµ‹ç»™steps
 		steps=abs(dx);  
 	else 
-		//·ñÔò£¬½«y±ä»¯Á¿¾ø¶ÔÖµ¸³¸østeps
+		//å¦åˆ™ï¼Œå°†yå˜åŒ–é‡ç»å¯¹å€¼èµ‹ç»™steps
 		steps=abs(dy);  
 		
-	xIncrement=dx/(float)steps; //¼ÆËãxÎ¢·ÖÔöÁ¿£¨x²½³¤£©
-	yIncrement=dy/(float)steps; //¼ÆËãyÎ¢·ÖÔöÁ¿£¨y²½³¤£©
+	xIncrement=dx/(float)steps; //è®¡ç®—xå¾®åˆ†å¢é‡ï¼ˆxæ­¥é•¿ï¼‰
+	yIncrement=dy/(float)steps; //è®¡ç®—yå¾®åˆ†å¢é‡ï¼ˆyæ­¥é•¿ï¼‰
 	
-	setPixel(round(x),round(y)); //»æÖÆÆğµãÏóËØ
+	setPixel(round(x),round(y)); //ç»˜åˆ¶èµ·ç‚¹è±¡ç´ 
 	
-	//µü´ú»æÖÆÊ£ÏÂµÄµã
-	for(k=0;k<steps;k++){	//µ±¼ÆÊıÆ÷ÊıÖµĞ¡ÓÚ²½ÊıÊ±Ö´ĞĞ
-		x+=xIncrement;      //¸øx¼ÓÒ»¸öx²½³¤ºó¸³Öµ¸øx
-		y+=yIncrement;		//¸øy¼ÓÒ»¸öy²½³¤ºó¸³Öµ¸øy
-		setPixel(round(x),round(y)); //»æÖÆ¶ÔÓ¦µã£¨round(x),round(y)£©ÏóËØ
+	//è¿­ä»£ç»˜åˆ¶å‰©ä¸‹çš„ç‚¹
+	for(k=0;k<steps;k++){	//å½“è®¡æ•°å™¨æ•°å€¼å°äºæ­¥æ•°æ—¶æ‰§è¡Œ
+		x+=xIncrement;      //ç»™xåŠ ä¸€ä¸ªxæ­¥é•¿åèµ‹å€¼ç»™x
+		y+=yIncrement;		//ç»™yåŠ ä¸€ä¸ªyæ­¥é•¿åèµ‹å€¼ç»™y
+		setPixel(round(x),round(y)); //ç»˜åˆ¶å¯¹åº”ç‚¹ï¼ˆround(x),round(y)ï¼‰è±¡ç´ 
 	}
 }
