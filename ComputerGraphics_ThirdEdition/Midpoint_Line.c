@@ -11,11 +11,11 @@ void Midpoint Line (int x0,int y0,int x1, int y1,int color){
 	drawpixel(x, y, color);
 	while (x<x1){ 
 		if (d<0) {
-			x++£» 
-			y++£» 
+			x++Â£; 
+			y++Â£; 
 			d+=d2; 
 		}else {
-			x++£» 
+			x++Â£;
 			d+=d1;
 		}
 
